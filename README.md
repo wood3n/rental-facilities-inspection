@@ -1,8 +1,8 @@
 # Rsbuild Shadcn Boilerplate
 
-A boilerplate project for building React applications with Rsbuild and Shadcn UI.
+A boilerplate project for building React applications with Rsbuild and Shadcn UI, see [rental-facilities-inspection](https://rental-facilities-inspection.vercel.app/)
 
-![intro](./intro.png)
+[![intro](./intro.png)](https://rental-facilities-inspection.vercel.app/)
 
 ## Setup
 
