@@ -7,27 +7,22 @@ export const DefaultSections: InspectionSection[] = [
     items: [
       {
         id: "item-1-1",
-        item: "空调",
+        item: "检查客厅墙壁和地板，地板接缝等是否有霉斑，裂缝和墙皮脱落的情况，闻是否有霉味",
         result: ""
       },
       {
         id: "item-1-2",
-        item: "电视",
+        item: "检查电闸箱是否正常，有没有网口",
         result: ""
       },
       {
         id: "item-1-3",
-        item: "沙发",
+        item: "检查照明",
         result: ""
       },
       {
         id: "item-1-4",
-        item: "茶几",
-        result: ""
-      },
-      {
-        id: "item-1-5",
-        item: "灯具",
+        item: "检查门窗开合是否正常，是否能上锁",
         result: ""
       }
     ]
@@ -38,22 +33,27 @@ export const DefaultSections: InspectionSection[] = [
     items: [
       {
         id: "item-2-1",
-        item: "床",
+        item: "观察墙壁和地板，地板接缝等是否有霉斑，裂缝和墙皮脱落的情况，闻是否有霉味",
         result: ""
       },
       {
         id: "item-2-2",
-        item: "衣柜",
+        item: "检查床是否稳当，坐下或者躺下翻身是否有响动",
         result: ""
       },
       {
         id: "item-2-3",
-        item: "书桌",
+        item: "检查灯光照明是否正常，插座是否松动",
         result: ""
       },
       {
         id: "item-2-4",
-        item: "窗帘",
+        item: "检查空调是否通电，选择制冷，1 分钟内是否有冷风吹出，噪音是否大，10 分钟后看是否有漏水；然后再选择制热，5分钟内有热风吹出并且没有烧糊的异味，且没有异响等问题；检查遥控器按键是否正常（模式，制冷，制热，除湿，屏显等）",
+        result: ""
+      },
+      {
+        id: "item-2-5",
+        item: "检查门窗开合是否正常，是否能上锁",
         result: ""
       }
     ]
@@ -64,22 +64,32 @@ export const DefaultSections: InspectionSection[] = [
     items: [
       {
         id: "item-3-1",
-        item: "冰箱",
+        item: "检查厨房灯光，冰箱，微波炉，油烟机等电器是否通电，插座是否松动",
         result: ""
       },
       {
         id: "item-3-2",
-        item: "燃气灶",
+        item: "检查油烟机吸力，可用一张薄纸巾贴近风口观察",
         result: ""
       },
       {
         id: "item-3-3",
-        item: "抽油烟机",
+        item: "检查冰箱冷藏室和冷冻室是否都制冷，内部是否有霉臭味和未清理干净的杂物，运行时噪音是否大，密封条是否完好",
         result: ""
       },
       {
         id: "item-3-4",
-        item: "橱柜",
+        item: "打开橱柜，观察是否有霉斑，问是否有霉味",
+        result: ""
+      },
+      {
+        id: "item-3-5",
+        item: "检查燃气灶是否生锈，下方管道接口是否完好，反复 2 次以上打火测试，并闻燃气软管接口处有没有煤气味",
+        result: ""
+      },
+      {
+        id: "item-3-6",
+        item: "检查水龙头是否出热水，大量排水是否通畅，观察下方排水管是否漏水，是否有异味",
         result: ""
       }
     ]
@@ -90,22 +100,73 @@ export const DefaultSections: InspectionSection[] = [
     items: [
       {
         id: "item-4-1",
-        item: "热水器",
+        item: "闻整体气味，不能有明显的霉味或下水味",
         result: ""
       },
       {
         id: "item-4-2",
-        item: "马桶",
+        item: "看吊顶是否有黄色水渍",
         result: ""
       },
       {
         id: "item-4-3",
-        item: "淋浴设备",
+        item: "看地面和墙面瓷砖缝是否有霉斑、黑斑；瓷砖是否有裂缝；瓷砖缝是否有翘边",
         result: ""
       },
       {
         id: "item-4-4",
-        item: "洗手盆",
+        item: "卫生间照明灯，取暖灯，热水器通电是否正常工作；插座是否松动",
+        result: ""
+      },
+      {
+        id: "item-4-5",
+        item: "热水器接口处是否有水迹或锈斑(排除漏水问题)",
+        result: ""
+      },
+      {
+        id: "item-4-6",
+        item: "检查洗脸盆水龙头、淋浴头水压是否正常，是否出热水",
+        result: ""
+      },
+      {
+        id: "item-4-7",
+        item: "检查洗脸盆、淋浴地漏排水是否通畅；洗脸盆下方是否漏水，放水测试下地漏排水速度，并闻一下是否有下水道反味",
+        result: ""
+      },
+      {
+        id: "item-4-8",
+        item: "检查马桶排水是否顺畅，冲完水后观察水箱是否一直有水声(排除马桶漏水)；看马桶底部和水箱后面是否有渗水痕",
+        result: ""
+      },
+      {
+        id: "item-4-9",
+        item: "检查洗衣机是否通电，闻洗衣机内部是否有异味；选择清洗，看进水口是否漏水，检查洗衣机转动是否正常，然后选择排水，观察洗衣机排水是否漏水，堵塞",
+        result: ""
+      }
+    ]
+  },
+  {
+    id: "section-5",
+    title: "生活费用",
+    items: [
+      {
+        id: "item-5-1",
+        item: "网费、物业费、取暖费、垃圾费如何收取，是否包含电梯等公区用电费用等其他费用",
+        result: ""
+      },
+      {
+        id: "item-5-2",
+        item: "水电燃气费如何收取",
+        result: ""
+      },
+      {
+        id: "item-5-3",
+        item: "是否有停车位",
+        result: ""
+      },
+      {
+        id: "item-5-4",
+        item: "房屋电器等设施非人为损坏后，房东是否负责维修",
         result: ""
       }
     ]

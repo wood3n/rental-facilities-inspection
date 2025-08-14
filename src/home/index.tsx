@@ -90,8 +90,8 @@ export default function RentalInspectionForm() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>检查项</TableHead>
-              <TableHead>检查结果</TableHead>
+              <TableHead className="w-1/2">检查项</TableHead>
+              <TableHead className="w-1/2">检查结果</TableHead>
               <TableHead className="w-[60px]">操作</TableHead>
             </TableRow>
           </TableHeader>
