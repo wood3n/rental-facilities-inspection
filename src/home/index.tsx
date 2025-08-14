@@ -1,60 +1,185 @@
-import { useEffect, useRef } from "react";
+"use client";
 
-import { ThemeToggle } from "@/components/theme-toggle";
+import { useState } from "react";
+
+import { Home, Trash2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Textarea } from "@/components/ui/textarea";
 
-const Home = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
+import type { CheckItem, InspectionSection } from "./types";
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
+import AddSection from "./add-section";
+import AddSectionItem from "./add-section-item";
+import { DefaultSections } from "./default-facilities";
+import { PdfExportButton } from "./pdf-export-button";
+
+export default function RentalInspectionForm() {
+  const [inspectionData, setInspectionData] = useState<InspectionSection[]>(DefaultSections);
+
+  const deleteSection = (sectionId: string) => {
+    setInspectionData(inspectionData.filter((item) => item.id !== sectionId));
+  };
+
+  const updateCheckItem = (sectionId: string, itemId: string, field: string, value: string) => {
+    setInspectionData(
+      inspectionData.map((section) =>
+        section.id === sectionId
+          ? {
+              ...section,
+              items: section.items?.map((item) => (item.id === itemId ? { ...item, [field]: value } : item))
+            }
+          : section
+      )
+    );
+  };
+
+  const deleteCheckItem = (sectionId: string, itemId: string) => {
+    setInspectionData(
+      inspectionData.map((section) =>
+        section.id === sectionId ? { ...section, items: section.items?.filter((item) => item.id !== itemId) } : section
+      )
+    );
+  };
+
+  const handleAddSection = (section: InspectionSection) => {
+    setInspectionData((prev) => [
+      ...prev,
+      {
+        ...section
+      }
+    ]);
+  };
+
+  const handleAddSectionItem = (sectionId: string, item: CheckItem) => {
+    setInspectionData((prev) =>
+      prev.map((section) =>
+        section.id === sectionId
+          ? {
+              ...section,
+              items: [...(section.items || []), item]
+            }
+          : section
+      )
+    );
+  };
+
+  const renderCheckSection = (section: InspectionSection) => (
+    <Card className="mb-6" key={section.id}>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div className="flex flex-1 items-center gap-2">
+            <h1 className="text-lg font-semibold">{section.title}</h1>
+          </div>
+          <div className="flex gap-2">
+            <AddSectionItem section={section} onSave={(item) => handleAddSectionItem(section.id, item)} />
+            <Button
+              onClick={() => deleteSection(section.id)}
+              size="sm"
+              variant="ghost"
+              className="text-red-500 hover:bg-red-50 hover:text-red-700"
+            >
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>检查项</TableHead>
+              <TableHead>检查结果</TableHead>
+              <TableHead className="w-[60px]">操作</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {section.items?.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>
+                  <Textarea
+                    value={item.item}
+                    onChange={(e) => updateCheckItem(section.id, item.id, "item", e.target.value)}
+                  />
+                </TableCell>
+                <TableCell>
+                  <Textarea
+                    value={item.result}
+                    onChange={(e) => updateCheckItem(section.id, item.id, "result", e.target.value)}
+                  />
+                </TableCell>
+                <TableCell>
+                  <Button
+                    onClick={() => deleteCheckItem(section.id, item.id)}
+                    size="sm"
+                    variant="ghost"
+                    className="text-red-500 hover:bg-red-50 hover:text-red-700"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  );
 
   return (
-    <div className="flex h-dvh w-dvw flex-col items-center justify-center">
-      <div className="flex w-full justify-between px-6 py-4">
-        <h1 className="text-2xl font-bold">Rsbuild Shadcn Boilerplate</h1>
-        <ThemeToggle />
+    <div className="container mx-auto max-w-6xl p-6">
+      <div className="mb-8">
+        <div className="mb-4 flex items-center gap-2">
+          <Home className="h-6 w-6" />
+          <h1 className="text-3xl font-bold">租房电器和设施检查表</h1>
+        </div>
+        <p className="text-muted-foreground">专业的租房检查表格，支持自定义检查项目和详细记录</p>
       </div>
-      <div className="flex min-h-0 flex-[1] items-center justify-center overflow-auto">
-        <Card className="w-full max-w-sm">
-          <CardHeader>
-            <CardTitle>Login to your account</CardTitle>
-            <CardDescription>Enter your email below to login to your account</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form>
-              <div className="flex flex-col gap-6">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input ref={inputRef} id="email" type="email" placeholder="m@example.com" required />
-                </div>
-                <div className="grid gap-2">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                    <Button variant="link" className="ml-auto inline-block text-sm underline-offset-4 hover:underline">
-                      Forgot your password?
-                    </Button>
-                  </div>
-                  <Input id="password" type="password" required />
-                </div>
-              </div>
-            </form>
-          </CardContent>
-          <CardFooter className="flex-col gap-2">
-            <Button type="submit" variant="default" className="w-full">
-              Login
-            </Button>
-          </CardFooter>
-        </Card>
+
+      {/* 操作按钮区域 */}
+      <div className="mb-6 flex items-center justify-between">
+        <AddSection onSave={handleAddSection} />
+        <PdfExportButton sections={inspectionData} />
+      </div>
+
+      {/* 检查项目 */}
+      {inspectionData.map((section) => renderCheckSection(section))}
+
+      {/* 隐藏的PDF内容 */}
+      <div id="inspection-report" className="hidden print:block">
+        <div className="p-8">
+          <div className="mb-8 text-center">
+            <h1 className="mb-2 text-2xl font-bold">租房电器和设施检查报告</h1>
+            <div className="text-sm text-gray-600">
+              <p>检查日期: {new Date().toLocaleDateString()}</p>
+            </div>
+          </div>
+
+          {inspectionData.map((section) => (
+            <div key={section.id} className="mb-6">
+              <h2 className="mb-3 border-b pb-1 text-lg font-semibold">{section.title}</h2>
+              <table className="w-full border-collapse border border-gray-300 text-sm">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 p-2 text-left">检查项</th>
+                    <th className="border border-gray-300 p-2 text-left">结果</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {section.items?.map((item) => (
+                    <tr key={item.id}>
+                      <td className="border border-gray-300 p-2">{item.item}</td>
+                      <td className="border border-gray-300 p-2">{item.result || "-"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
-};
-
-export default Home;
+}

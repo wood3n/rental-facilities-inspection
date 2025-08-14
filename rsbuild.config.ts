@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [pluginReact(), pluginSvgr()],
   html: {
     favicon: "./public/favicon.svg",
-    title: "Rsbuild Shadcn Boilerplate"
+    title: "Rental Facilities Inspection"
   }
 });

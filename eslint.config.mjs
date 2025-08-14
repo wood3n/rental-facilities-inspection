@@ -30,6 +30,7 @@ export default tseslint.config([
       globals: globals.browser
     },
     rules: {
+      "@typescript-eslint/no-explicit-any": 0,
       // https://github.com/shadcn-ui/ui/issues/1534
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }]
     }
